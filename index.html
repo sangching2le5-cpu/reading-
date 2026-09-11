@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Comprehension Test | English Practice</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root{
+    --bg: #eef4fb;
+    --card: #ffffff;
+    --primary: #2f6fb3;
+    --primary-dark: #1d4f86;
+    --primary-soft: #e3eefb;
+    --border: #d5e3f2;
+    --text: #1e2a38;
+    --muted: #5c7288;
+    --green: #1a7f4b;
+    --green-bg: #e7f7ee;
+    --red: #b3261e;
+    --red-bg: #fdeceb;
+    --radius: 14px;
+    --shadow: 0 2px 12px rgba(31,82,136,.09);
+    --shadow-lg: 0 10px 30px rgba(31,82,136,.16);
+  }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  [hidden]{ display: none !important; }
+
+  h1, h2, h3, h4 { line-height: 1.28; margin: 0 0 .5em; }
+
+  :focus-visible{
+    outline: 3px solid #6fa8dc;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  .wrap{ max-width: 1060px; margin: 0 auto; padding: 0 18px; }
+
+  /* ============ HEADER ============ */
+  .app-header{
+    background: linear-gradient(135deg, #3d80c6 0%, #2f6fb3 55%, #5b9bd5 100%);
+    color: #fff;
+    padding: 24px 0 26px;
+    box-shadow: 0 3px 16px rgba(31,82,136,.20);
+  }
+  .app-header .eyebrow{
+    margin: 0 0 4px;
+    font-size: .78rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    opacity: .85;
+    font-weight: 600;
+  }
+  .app-header h1{
+    font-size: clamp(1.35rem, 3.4vw, 1.85rem);
+    margin: 0 0 6px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+  .app-header .tagline{
+    margin: 0;
+    font-size: .95rem;
+    opacity: .92;
+    max-width: 720px;
+  }
+
+  main{ padding: 26px 0 60px; }
+
+  /* ============ SCREENS ============ */
+  .screen{ display: none; animation: fadeIn .25s ease; }
+  .screen.is-active{ display: block; }
+
+  @keyframes fadeIn{ from{ opacity: 0; transform: translateY(6px);} to{ opacity:1; transform:none;} }
+
+  .section-title{ font-size: 1.35rem; color: var(--primary-dark); }
+  .section-lead{ color: var(--muted); margin: 0 0 22px; max-width: 780px; }
+
+  /* ============ CARDS ============ */
+  .card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 18px;
+  }
+
+  /* ============ HOME ============ */
+  .test-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+    gap: 18px;
+    margin-bottom: 10px;
+  }
+  .test-card{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    text-align: left;
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    box-shadow: var(--shadow);
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  }
+  .test-card:hover{
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: #9cc3e8;
+  }
+  .card-badge{
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: var(--primary-soft);
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+  .card-title{
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    line-height: 1.35;
+  }
+  .card-meta{
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .card-desc{
+    font-size: .92rem;
+    color: var(--muted);
+  }
+  .card-best{
+    margin-top: 6px;
+    font-size: .8rem;
+    font-weight: 700;
+    color: var(--green);
+    background: var(--green-bg);
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+
+  /* ============ BUTTONS ============ */
+  .btn{
+    font: inherit;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 11px 20px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background .15s, border-color .15s, color .15s, transform .08s;
+  }
+  .btn:active{ transform: translateY(1px); }
+  .btn-primary{ background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn-primary:hover{ background: var(--primary-dark); border-color: var(--primary-dark); }
+  .btn-outline{ background: #fff; color: var(--primary-dark); border-color: #b6d2ec; }
+  .btn-outline:hover{ background: #eef6fe; }
+  .btn-ghost{ background: transparent; color: var(--muted); border-color: transparent; }
+  .btn-ghost:hover{ background: #e8f1fb; color: var(--primary-dark); }
+  .btn-sm{ padding: 8px 14px; font-size: .88rem; }
+  .btn-lg{ padding: 14px 30px; font-size: 1.03rem; }
+  .btn:disabled{ opacity: .4; cursor: not-allowed; }
+
+  .toolbar{ margin-bottom: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* ============ PASSAGE ============ */
+  .passage-title{
+    font-size: clamp(1.15rem, 2.6vw, 1.42rem);
+    color: var(--primary-dark);
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-soft);
+    margin-bottom: 18px;
+  }
+  .passage p{
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.06rem;
+    line-height: 1.9;
+    color: #24354a;
+    margin: 0 0 1.15em;
+  }
+  .passage p:last-child{ margin-bottom: 0; }
+  .passage h3{
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin: 1.5em 0 .55em;
+    padding-left: 12px;
+    border-left: 4px solid #9cc3e8;
+  }
+  .passage h3:first-child{ margin-top: 0; }
+
+  .start-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    box-shadow: var(--shadow);
+  }
+  .start-bar p{ margin: 0; color: var(--muted); font-size: .95rem; }
+
+  /* ============ TEST TOP BAR ============ */
+  .test-topbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 14px 18px;
+  }
+  .topbar-left{ display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .topbar-right{ display: flex; gap: 8px; flex-wrap: wrap; }
+  .test-mode-label{
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-size: .95rem;
+  }
+  .timer{
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--primary-dark);
+    background: var(--primary-soft);
+    border-radius: 99px;
+    padding: 6px 16px;
+    letter-spacing: .04em;
+  }
+  .timer.is-low{
+    background: var(--red-bg);
+    color: var(--red);
+  }
+
+  /* ============ PROGRESS ============ */
+  .progress-card{ padding: 16px 20px; }
+  .progress-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 9px;
+    flex-wrap: wrap;
+  }
+  .progress-head #answeredText{ color: var(--muted); font-weight: 600; }
+  .progress-track{
+    height: 10px;
+    background: #e4edf7;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill{
+    height: 100%;
+    width: 0%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #6ba7dd, #2f6fb3);
+    transition: width .3s ease;
+  }
+
+  /* ============ QUESTION ============ */
+  .question-card{ padding: 26px 26px 22px; }
+  .q-head{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .q-skill{
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: var(--primary-soft);
+    padding: 4px 11px;
+    border-radius: 99px;
+  }
+  .q-source{
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: #6b5aa0;
+    background: #efeafd;
+    padding: 4px 11px;
+    border-radius: 99px;
+  }
+  .q-text{
+    font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .options{ display: flex; flex-direction: column; }
+
+  .option{
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+    width: 100%;
+    background: #fbfdff;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    transition: background .15s, border-color .15s, box-shadow .15s;
+  }
+  .option:last-child{ margin-bottom: 0; }
+  .option:hover{ background: #f1f7fe; border-color: #a9cbea; }
+  .option.selected{
+    background: var(--primary-soft);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(47,111,179,.13);
+  }
+  .option .letter{
+    flex: 0 0 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #eaf2fb;
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: .88rem;
+    transition: background .15s, color .15s;
+  }
+  .option.selected .letter{ background: var(--primary); color: #fff; }
+  .option .opt-text{ padding-top: 3px; }
+
+  /* ============ NAV BAR ============ */
+  .nav-bar{
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .nav-bar .btn-primary{ margin-left: auto; }
+
+  /* ============ NAVIGATOR ============ */
+  .navigator-card{ padding: 20px; }
+  .nav-title{
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .navigator{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .nav-btn{
+    padding: 9px 0;
+    border-radius: 9px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    font: inherit;
+    font-weight: 700;
+    font-size: .88rem;
+    color: var(--muted);
+    cursor: pointer;
+    transition: .15s;
+  }
+  .nav-btn:hover{ border-color: #9cc3e8; }
+  .nav-btn.is-answered{ background: #e7f2fd; border-color: #a8cbea; color: var(--primary-dark); }
+  .nav-btn.is-current{ background: var(--primary); border-color: var(--primary); color: #fff; }
+
+  .legend{
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: .8rem;
+    color: var(--muted);
+  }
+  .legend span{ display: inline-flex; align-items: center; gap: 7px; }
+  .dot{ width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+  .dot-current{ background: var(--primary); }
+  .dot-answered{ background: #e7f2fd; border: 1.5px solid #a8cbea; }
+  .dot-unanswered{ background: #fff; border: 1.5px solid var(--border); }
+
+  /* ============ RESULT ============ */
+  .result-card{ text-align: center; padding: 34px 26px; }
+  .eyebrow-sm{
+    margin: 0 0 6px;
+    font-size: .76rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .result-card h2{ font-size: 1.35rem; color: var(--primary-dark); margin-bottom: 22px; }
+
+  .result-hero{ margin-bottom: 24px; }
+  .percent{
+    font-size: clamp(3rem, 11vw, 4.4rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--primary-dark);
+    letter-spacing: -.03em;
+  }
+  .fraction{
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .stat-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .stat{
+    background: #f7fbff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 10px;
+  }
+  .stat-num{
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label{
+    display: block;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .stat-num.good{ color: var(--green); }
+  .stat-num.bad{ color: var(--red); }
+
+  .feedback{
+    font-size: 1rem;
+    background: var(--primary-soft);
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-align: left;
+    margin: 0;
+    color: var(--primary-dark);
+    font-weight: 500;
+  }
+
+  /* ============ SKILLS ============ */
+  .skills-card h3{ font-size: 1.05rem; color: var(--primary-dark); margin-bottom: 18px; }
+  .skill-row{
+    display: grid;
+    grid-template-columns: 175px 1fr 58px;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .skill-name{ font-size: .88rem; font-weight: 600; color: var(--text); }
+  .skill-track{
+    height: 10px;
+    background: #e8f0f9;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .skill-fill{
+    height: 100%;
+    width: 0%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #6ba7dd, #2f6fb3);
+    transition: width .5s ease;
+  }
+  .skill-pct{
+    font-size: .86rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ============ REVIEW ============ */
+  .review-item{
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .review-item.correct{ border-left: 5px solid var(--green); }
+  .review-item.incorrect{ border-left: 5px solid var(--red); }
+
+  .review-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .review-num{
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pill{
+    font-size: .78rem;
+    font-weight: 700;
+    padding: 4px 13px;
+    border-radius: 99px;
+  }
+  .pill-correct{ background: var(--green-bg); color: var(--green); }
+  .pill-incorrect{ background: var(--red-bg); color: var(--red); }
+
+  .review-q{
+    font-weight: 600;
+    font-size: 1.02rem;
+    margin: 0 0 12px;
+  }
+  .ans{
+    margin: 0 0 7px;
+    font-size: .94rem;
+    padding: 10px 14px;
+    border-radius: 9px;
+    background: #f7fbff;
+    border: 1px solid var(--border);
+  }
+  .ans-user.is-wrong{ background: var(--red-bg); border-color: #f3c9c6; color: #7a1d17; }
+  .ans-user.is-right{ background: var(--green-bg); border-color: #b9e6cf; color: #14603a; }
+  .ans-correct{ background: var(--green-bg); border-color: #b9e6cf; color: #14603a; }
+
+  .review-why{
+    margin-top: 12px;
+    font-size: .93rem;
+    background: #f7fbff;
+    border-left: 4px solid #9cc3e8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #33475e;
+  }
+  .review-why strong{ color: var(--primary-dark); }
+
+  /* ============ MODAL ============ */
+  .modal-backdrop{
+    position: fixed;
+    inset: 0;
+    background: rgba(21, 44, 71, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+  }
+  .modal{
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 22px 55px rgba(15,35,60,.35);
+  }
+  .modal h2{ font-size: 1.15rem; color: var(--primary-dark); margin-bottom: 10px; }
+  .modal p{ margin: 0 0 22px; color: var(--muted); }
+  .modal-actions{ display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 640px){
+    .card{ padding: 18px; }
+    .question-card{ padding: 20px 16px; }
+    .app-header{ padding: 18px 0 20px; }
+    main{ padding: 18px 0 44px; }
+    .passage p{ font-size: 1rem; line-height: 1.8; }
+    .nav-bar{ flex-direction: column; }
+    .nav-bar .btn{ width: 100%; margin-left: 0; }
+    .skill-row{ grid-template-columns: 108px 1fr 48px; gap: 9px; }
+    .skill-name{ font-size: .78rem; }
+    .test-topbar{ padding: 12px 14px; }
+    .topbar-right{ width: 100%; }
+    .topbar-right .btn{ flex: 1; }
+    .start-bar{ flex-direction: column; align-items: stretch; text-align: center; }
+    .start-bar .btn{ width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="wrap">
+    <p class="eyebrow">English Reading Practice</p>
+    <h1>Reading Comprehension Test</h1>
+    <p class="tagline">Two academic readings &middot; 20 multiple-choice questions &middot; instant scoring, skill analysis and detailed feedback.</p>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+
+  <!-- ================= HOME ================= -->
+  <section id="screen-home" class="screen is-active" aria-labelledby="homeHeading">
+    <h2 class="section-title" id="homeHeading">Choose a test</h2>
+    <p class="section-lead">
+      Select one reading or take the full 20-question test. Every new attempt shuffles both the
+      question order and the answer choices, so no two attempts are the same.
+    </p>
+
+    <div class="test-grid">
+      <button type="button" class="test-card" data-mode="zendaya">
+        <span class="card-badge">Reading 1</span>
+        <span class="card-title">The Journey of Zendaya</span>
+        <span class="card-meta">10 questions &middot; 15 minutes</span>
+        <span class="card-desc">From local theater and the Disney Channel to Emmy-winning drama, blockbuster films, fashion and philanthropy.</span>
+        <span class="card-best" data-best="zendaya" hidden></span>
+      </button>
+
+      <button type="button" class="test-card" data-mode="animation">
+        <span class="card-badge">Reading 2</span>
+        <span class="card-title">Behind the Scenes: How Animated Films Come to Life</span>
+        <span class="card-meta">10 questions &middot; 15 minutes</span>
+        <span class="card-desc">The step-by-step process of producing an animated film, from brainstorming to the final render.</span>
+        <span class="card-best" data-best="animation" hidden></span>
+      </button>
+
+      <button type="button" class="test-card" data-mode="both">
+        <span class="card-badge">Full Test</span>
+        <span class="card-title">Both Readings</span>
+        <span class="card-meta">20 questions &middot; 25 minutes</span>
+        <span class="card-desc">All questions from both readings, shuffled together into one complete comprehension test.</span>
+        <span class="card-best" data-best="both" hidden></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= PASSAGE ================= -->
+  <section id="screen-passage" class="screen" aria-labelledby="passageHeading">
+    <div class="toolbar">
+      <button type="button" class="btn btn-ghost" id="backHomeBtn">&larr; Back to test selection</button>
+    </div>
+    <h2 class="section-title" id="passageHeading">Reading Passage</h2>
+    <p class="section-lead">Read carefully. You may reopen the passage at any time during the test.</p>
+    <div id="passageContainer"></div>
+    <div class="start-bar">
+      <p id="startBarInfo">The questions and answer choices will be shuffled for this attempt.</p>
+      <button type="button" class="btn btn-primary btn-lg" id="startTestBtn">Start Test &rarr;</button>
+    </div>
+  </section>
+
+  <!-- ================= TEST ================= -->
+  <section id="screen-test" class="screen" aria-labelledby="qText">
+    <div class="card test-topbar">
+      <div class="topbar-left">
+        <span class="test-mode-label" id="testModeLabel"></span>
+        <span class="timer" id="timerDisplay" aria-live="polite" aria-label="Time remaining">15:00</span>
+      </div>
+      <div class="topbar-right">
+        <button type="button" class="btn btn-ghost btn-sm" id="togglePassageBtn" aria-expanded="false">&#128214; Show Passage</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="resetBtn">&#8635; Reset Test</button>
+      </div>
+    </div>
+
+    <div class="card passage-panel" id="passagePanel" hidden></div>
+
+    <div class="card progress-card">
+      <div class="progress-head">
+        <span id="progressText">Question 1 of 10</span>
+        <span id="answeredText">0 of 10 answered</span>
+      </div>
+      <div class="progress-track" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Test progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="card question-card" id="questionCard">
+      <div class="q-head">
+        <span class="q-skill" id="qSkill"></span>
+        <span class="q-source" id="qSource" hidden></span>
+      </div>
+      <h2 class="q-text" id="qText" tabindex="-1"></h2>
+      <div class="options" id="options" role="group" aria-label="Answer choices"></div>
+    </div>
+
+    <div class="nav-bar">
+      <button type="button" class="btn btn-outline" id="prevBtn">&larr; Previous</button>
+      <button type="button" class="btn btn-outline" id="nextBtn">Next &rarr;</button>
+      <button type="button" class="btn btn-primary" id="submitBtn">Submit Test</button>
+    </div>
+
+    <div class="card navigator-card">
+      <h3 class="nav-title">Question Navigator</h3>
+      <div class="navigator" id="navigator"></div>
+      <div class="legend">
+        <span><i class="dot dot-current"></i> Current</span>
+        <span><i class="dot dot-answered"></i> Answered</span>
+        <span><i class="dot dot-unanswered"></i> Unanswered</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESULT ================= -->
+  <section id="screen-result" class="screen" aria-labelledby="resultHeading">
+    <div class="card result-card">
+      <p class="eyebrow-sm">Test complete</p>
+      <h2 id="resultHeading">Your Score</h2>
+      <div class="result-hero">
+        <div class="percent" id="resultPercent">0%</div>
+        <div class="fraction" id="resultFraction">0 / 10</div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-num good" id="statCorrect">0</span><span class="stat-label">Correct</span></div>
+        <div class="stat"><span class="stat-num bad" id="statIncorrect">0</span><span class="stat-label">Incorrect</span></div>
+        <div class="stat"><span class="stat-num" id="statTime">00:00</span><span class="stat-label">Time used</span></div>
+      </div>
+      <p class="feedback" id="resultFeedback"></p>
+    </div>
+
+    <div class="card skills-card">
+      <h3>Reading Skills Analysis</h3>
+      <div id="skillsContainer"></div>
+    </div>
+
+    <div class="nav-bar">
+      <button type="button" class="btn btn-primary" id="reviewBtn">Review Answers</button>
+      <button type="button" class="btn btn-outline" id="retakeBtn">&#8635; Retake Test</button>
+      <button type="button" class="btn btn-outline" id="homeFromResultBtn">Choose Another Test</button>
+    </div>
+  </section>
+
+  <!-- ================= REVIEW ================= -->
+  <section id="screen-review" class="screen" aria-labelledby="reviewHeading">
+    <div class="toolbar">
+      <button type="button" class="btn btn-ghost" id="backToResultBtn">&larr; Back to results</button>
+    </div>
+    <h2 class="section-title" id="reviewHeading">Detailed Review</h2>
+    <p class="section-lead">Every question is shown with your answer, the correct answer and evidence from the passage.</p>
+    <div id="reviewList"></div>
+    <div class="nav-bar">
+      <button type="button" class="btn btn-primary" id="retakeFromReviewBtn">&#8635; Retake Test</button>
+      <button type="button" class="btn btn-outline" id="homeFromReviewBtn">Choose Another Test</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= MODAL ================= -->
+<div class="modal-backdrop" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalText">
+    <h2 id="modalTitle">Submit test?</h2>
+    <p id="modalText"></p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="modalCancel">Cancel</button>
+      <button type="button" class="btn btn-primary" id="modalOk">Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     READING DATABASE  (original content — never mutated)
+     ========================================================= */
+  const READINGS = [
+    {
+      id: 'zendaya',
+      label: 'Reading 1',
+      title: 'The Journey of Zendaya',
+      desc: 'From local theater and Disney Channel to Emmy-winning drama, blockbuster films, fashion and philanthropy.',
+      minutes: 15,
+      passage: `
+        <p>Zendaya Coleman, known simply as Zendaya, is one of the most versatile and influential artists of her generation. Born in Oakland, California, in 1996, her early life was deeply connected to the arts. Her mother worked as a house manager at a local theater, where Zendaya spent countless hours watching performances and learning about stagecraft. Inspired by these experiences, she began her acting career at a young age, performing in local theater productions and modeling for major brands before making her television debut.</p>
+        <p>Her big break came in 2010 when she landed a starring role on the Disney Channel sitcom Shake It Up. The show quickly made her a household name among teenagers. However, rather than remaining confined to child roles, Zendaya made deliberate decisions to transition into mature, complex projects. Her determination paid off when she took on the lead role of Rue Bennett, a struggling teenager, in the critically acclaimed drama series Euphoria. Her intense, authentic performance earned her two Primetime Emmy Awards, making her the youngest two-time winner of the Outstanding Lead Actress category.</p>
+        <p>Beyond television, Zendaya successfully expanded her career into blockbuster films. She achieved global recognition for her role as MJ in the Marvel Cinematic Universe's Spider-Man trilogy, as well as starring in sci-fi epics like Dune. Her ability to portray diverse characters—from a high-flying acrobat in The Greatest Showman to a fiercely independent warrior in a distant sci-fi universe—demonstrates her remarkable artistic range.</p>
+        <p>In addition to her acting achievements, Zendaya has established herself as a global fashion icon and a respected philanthropist. She regularly uses her platform to advocate for diversity in the entertainment industry and support social justice initiatives. Through careful career choices and an unwavering commitment to authenticity, Zendaya has transformed from a teenage television star into a powerful figure in modern culture, proving that passion and resilience can lead to extraordinary success.</p>
+      `,
+      questions: [
+        {
+          id: 'z1',
+          skill: 'Main Idea',
+          question: 'What is the main idea of the passage?',
+          options: [
+            { id: 'a', text: 'Zendaya only became famous because of Disney Channel.' },
+            { id: 'b', text: 'Zendaya developed from a young television star into a versatile and influential cultural figure.' },
+            { id: 'c', text: "Zendaya's career was mainly focused on fashion and philanthropy." },
+            { id: 'd', text: 'Zendaya became successful because she avoided difficult acting roles.' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'The passage follows Zendaya from her early theater experiences and her Disney Channel role through Emmy-winning drama, blockbuster films, fashion and philanthropy. Together, these details present her overall development into a versatile and influential cultural figure.'
+        },
+        {
+          id: 'z2',
+          skill: 'Detail',
+          question: "How did Zendaya's early environment influence her career?",
+          options: [
+            { id: 'a', text: 'Her parents encouraged her to study business.' },
+            { id: 'b', text: "Her mother's work at a theater exposed her to performances and stagecraft." },
+            { id: 'c', text: 'She watched Hollywood movies every day.' },
+            { id: 'd', text: 'She began working as a television producer.' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'The passage states that her mother worked as a house manager at a local theater, where Zendaya spent countless hours watching performances and learning about stagecraft.'
+        },
+        {
+          id: 'z3',
+          skill: 'Detail',
+          question: 'For which role did Zendaya win two Primetime Emmy Awards?',
+          options: [
+            { id: 'a', text: 'MJ in Spider-Man' },
+            { id: 'b', text: 'A performer in The Greatest Showman' },
+            { id: 'c', text: 'Rue Bennett in Euphoria' },
+            { id: 'd', text: 'A character in Dune' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'The passage says she took on the lead role of Rue Bennett in the drama series Euphoria, and that her intense, authentic performance earned her two Primetime Emmy Awards.'
+        },
+        {
+          id: 'z4',
+          skill: 'Vocabulary in Context',
+          question: 'What does the word "versatile" in paragraph 1 most nearly mean?',
+          options: [
+            { id: 'a', text: 'Able to perform successfully in many different areas' },
+            { id: 'b', text: 'Famous only among teenagers' },
+            { id: 'c', text: 'Difficult to understand' },
+            { id: 'd', text: 'Focused on one particular skill' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'The passage describes Zendaya as successful in television, blockbuster films, fashion and philanthropy. "Versatile" therefore means able to perform successfully in many different areas.'
+        },
+        {
+          id: 'z5',
+          skill: 'Vocabulary in Context',
+          question: 'What does "confined" in paragraph 2 most nearly mean?',
+          options: [
+            { id: 'a', text: 'Limited or restricted' },
+            { id: 'b', text: 'Praised publicly' },
+            { id: 'c', text: 'Completely forgotten' },
+            { id: 'd', text: 'Professionally trained' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'The sentence "rather than remaining confined to child roles" contrasts staying limited to child roles with moving into mature, complex projects. So "confined" means limited or restricted.'
+        },
+        {
+          id: 'z6',
+          skill: 'Reference / Pronoun',
+          question: 'The word "Her" in paragraph 2 refers to:',
+          options: [
+            { id: 'a', text: "Zendaya's mother" },
+            { id: 'b', text: 'Rue Bennett' },
+            { id: 'c', text: 'The director of Euphoria' },
+            { id: 'd', text: 'Zendaya' }
+          ],
+          correctAnswer: 'd',
+          explanation: 'The sentence reads: "Her determination paid off when she took on the lead role of Rue Bennett…" The pronoun refers back to the main subject of the paragraph, Zendaya.'
+        },
+        {
+          id: 'z7',
+          skill: 'Inference',
+          question: "What can be inferred about Zendaya's career choices?",
+          options: [
+            { id: 'a', text: 'She preferred to stay with familiar roles.' },
+            { id: 'b', text: 'She intentionally chose more challenging and mature projects.' },
+            { id: 'c', text: 'She avoided blockbuster films.' },
+            { id: 'd', text: 'She focused entirely on television.' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'The passage says she "made deliberate decisions to transition into mature, complex projects," which shows she intentionally chose more challenging roles.'
+        },
+        {
+          id: 'z8',
+          skill: 'Detail',
+          question: 'What impact has Zendaya had outside acting?',
+          options: [
+            { id: 'a', text: 'She has become a professional athlete.' },
+            { id: 'b', text: 'She has used her platform to support diversity and social justice.' },
+            { id: 'c', text: 'She has founded a theater school.' },
+            { id: 'd', text: 'She has stopped working in entertainment.' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'The passage states that she "regularly uses her platform to advocate for diversity in the entertainment industry and support social justice initiatives."'
+        },
+        {
+          id: 'z9',
+          skill: "Writer's Purpose",
+          question: "What is the writer's main purpose?",
+          options: [
+            { id: 'a', text: "To criticize Zendaya's career decisions" },
+            { id: 'b', text: 'To explain how television stars become famous' },
+            { id: 'c', text: "To describe Zendaya's career development and broader influence" },
+            { id: 'd', text: 'To compare Zendaya with other Disney actors' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'The passage presents Zendaya\'s development from early theater work and Disney Channel fame to Emmy-winning roles, blockbuster films, fashion and philanthropy — in other words, her career development and broader influence.'
+        },
+        {
+          id: 'z10',
+          skill: 'Tone',
+          question: 'What is the overall tone of the passage?',
+          options: [
+            { id: 'a', text: 'Critical and negative' },
+            { id: 'b', text: 'Humorous and informal' },
+            { id: 'c', text: 'Positive and admiring' },
+            { id: 'd', text: 'Uncertain and confused' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Expressions such as "versatile and influential," "critically acclaimed," "remarkable artistic range" and "extraordinary success" show a positive and admiring tone.'
+        }
+      ]
+    },
+    {
+      id: 'animation',
+      label: 'Reading 2',
+      title: 'Behind the Scenes: How Animated Films Come to Life',
+      desc: 'The step-by-step process of producing an animated film, from brainstorming to the final render.',
+      minutes: 15,
+      passage: `
+        <p>Animated movies are enjoyed by millions of people worldwide, but few realize how much effort goes into making them. Producing an animated film is a complex and fascinating journey that can take several years to complete. Here is how the magic happens step by step.</p>
+        <h3>1. The Brainstorming Phase (Pre-Production)</h3>
+        <p>Every animated movie starts with a creative idea. First, writers draft the script, outlining the plot and characters' dialogue. Next, artists create a storyboard, which is a visual guide that looks like a comic strip. This step allows the director to see how the story flows before actual production begins. At the same time, concept artists design the characters, and voice actors record their lines so animators can match the character movements to the audio later.</p>
+        <h3>2. The Creation Phase (Production)</h3>
+        <p>In modern animation, especially 3D films, artists build digital models of characters and objects using specialized computer software. Animators then act as digital puppeteers, bringing these models to life frame by frame. They carefully adjust facial expressions, body language, and movements to convey emotion. Additionally, lighting and texture experts add colors, shadows, and realistic details—such as hair and cloth movement—to make the world visually appealing.</p>
+        <h3>3. The Final Touch (Post-Production)</h3>
+        <p>Once the visual animation is finished, sound designers and composers join the team. They create sound effects, such as footsteps and wind, and compose a musical score to enhance the film's atmosphere. Finally, all the visual and audio elements are edited together and rendered—a computer process that transforms all the digital data into a seamless, high-quality movie ready for the cinema.</p>
+        <p>Making an animated movie requires extraordinary patience, creativity, and teamwork. The next time you watch one, remember the hundreds of talented artists who worked hard to bring that world to life!</p>
+      `,
+      questions: [
+        {
+          id: 'a1',
+          skill: "Writer's Purpose",
+          question: 'What is the main purpose of the passage?',
+          options: [
+            { id: 'a', text: 'To explain why animated movies are expensive' },
+            { id: 'b', text: 'To describe famous animated movies' },
+            { id: 'c', text: 'To explain the main stages involved in producing an animated film' },
+            { id: 'd', text: 'To compare animated movies with live-action movies' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'The passage explains the process of making an animated film step by step, moving through pre-production, production and post-production.'
+        },
+        {
+          id: 'a2',
+          skill: 'Detail',
+          question: 'What is a storyboard?',
+          options: [
+            { id: 'a', text: 'A musical recording of the film' },
+            { id: 'b', text: 'A visual guide showing how the story flows' },
+            { id: 'c', text: 'A computer program used to create animation' },
+            { id: 'd', text: "A list of actors' names" }
+          ],
+          correctAnswer: 'b',
+          explanation: 'The passage defines a storyboard as "a visual guide that looks like a comic strip" which allows the director to see how the story flows before production begins.'
+        },
+        {
+          id: 'a3',
+          skill: 'Detail',
+          question: 'What do lighting and texture experts do?',
+          options: [
+            { id: 'a', text: "Write the film's script" },
+            { id: 'b', text: "Record the characters' voices" },
+            { id: 'c', text: 'Add colors, shadows, and realistic visual details' },
+            { id: 'd', text: 'Edit the dialogue' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'The passage states that lighting and texture experts "add colors, shadows, and realistic details—such as hair and cloth movement."'
+        },
+        {
+          id: 'a4',
+          skill: 'Detail',
+          question: 'When are music and sound effects added?',
+          options: [
+            { id: 'a', text: 'Before the script is written' },
+            { id: 'b', text: 'During post-production' },
+            { id: 'c', text: 'During brainstorming' },
+            { id: 'd', text: 'Before the characters are designed' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'The section "The Final Touch (Post-Production)" explains that once the visual animation is finished, sound designers and composers create sound effects and compose the musical score.'
+        },
+        {
+          id: 'a5',
+          skill: 'Reference / Pronoun',
+          question: 'The word "them" in paragraph 1 refers to:',
+          options: [
+            { id: 'a', text: 'Animated movies' },
+            { id: 'b', text: 'Millions of people' },
+            { id: 'c', text: 'Writers' },
+            { id: 'd', text: 'Artists' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'The first sentence says animated movies "are enjoyed by millions of people worldwide, but few realize how much effort goes into making them." "Them" refers to animated movies.'
+        },
+        {
+          id: 'a6',
+          skill: 'Reference / Pronoun',
+          question: 'The word "They" in paragraph 3 refers to:',
+          options: [
+            { id: 'a', text: 'Animators' },
+            { id: 'b', text: 'Sound designers and composers' },
+            { id: 'c', text: 'Lighting experts' },
+            { id: 'd', text: 'Voice actors' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'The sentence reads: "Once the visual animation is finished, sound designers and composers join the team. They create sound effects…" So "They" refers to the sound designers and composers.'
+        },
+        {
+          id: 'a7',
+          skill: 'Detail',
+          question: 'Why do voice actors record their lines during pre-production?',
+          options: [
+            { id: 'a', text: 'To finish the movie more quickly' },
+            { id: 'b', text: 'So animators can match character movements to the audio' },
+            { id: 'c', text: 'So the director can edit the final movie' },
+            { id: 'd', text: 'To create the musical score' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'The passage says voice actors record their lines during pre-production "so animators can match the character movements to the audio later."'
+        },
+        {
+          id: 'a8',
+          skill: 'Inference',
+          question: 'What can be inferred about the animation process?',
+          options: [
+            { id: 'a', text: 'It is simple and requires few people.' },
+            { id: 'b', text: 'Most of the work happens during post-production.' },
+            { id: 'c', text: 'It requires cooperation among people with different specialized skills.' },
+            { id: 'd', text: 'Technology has made teamwork unnecessary.' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'The passage mentions writers, storyboard artists, concept artists, voice actors, animators, lighting and texture experts, sound designers and composers working together, and concludes that the process requires "extraordinary patience, creativity, and teamwork."'
+        },
+        {
+          id: 'a9',
+          skill: 'Vocabulary in Context',
+          question: 'What does "convey" in paragraph 2 most nearly mean?',
+          options: [
+            { id: 'a', text: 'Hide' },
+            { id: 'b', text: 'Express' },
+            { id: 'c', text: 'Remove' },
+            { id: 'd', text: 'Copy' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Animators adjust facial expressions, body language and movements in order to "convey emotion" — that is, to express emotion.'
+        },
+        {
+          id: 'a10',
+          skill: 'Vocabulary in Context',
+          question: 'What does "seamless" in paragraph 3 most nearly mean?',
+          options: [
+            { id: 'a', text: 'Smooth and continuous' },
+            { id: 'b', text: 'Expensive and complicated' },
+            { id: 'c', text: 'Bright and colorful' },
+            { id: 'd', text: 'Fast and modern' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Rendering transforms all the digital data into a "seamless, high-quality movie" — meaning the result is smooth and continuous, with no visible breaks between the elements.'
+        }
+      ]
+    }
+  ];
+
+  const SKILL_ORDER = [
+    'Main Idea',
+    'Detail',
+    'Inference',
+    'Vocabulary in Context',
+    'Reference / Pronoun',
+    "Writer's Purpose",
+    'Tone'
+  ];
+
+  /* =========================================================
+     STATE
+     ========================================================= */
+  let mode = null;              // 'zendaya' | 'animation' | 'both'
+  let attempt = [];             // randomized question objects (clones)
+  let answers = {};             // uid -> optionId
+  let current = 0;
+  let timerId = null;
+  let timeLeft = 0;
+  let totalTime = 0;
+  let startStamp = 0;
+  let finished = false;
+
+  /* =========================================================
+     DOM
+     ========================================================= */
+  const screens = {
+    home: document.getElementById('screen-home'),
+    passage: document.getElementById('screen-passage'),
+    test: document.getElementById('screen-test'),
+    result: document.getElementById('screen-result'),
+    review: document.getElementById('screen-review')
+  };
+
+  const passageContainer = document.getElementById('passageContainer');
+  const startBarInfo     = document.getElementById('startBarInfo');
+  const startTestBtn     = document.getElementById('startTestBtn');
+  const backHomeBtn      = document.getElementById('backHomeBtn');
+
+  const testModeLabel    = document.getElementById('testModeLabel');
+  const timerDisplay     = document.getElementById('timerDisplay');
+  const togglePassageBtn = document.getElementById('togglePassageBtn');
+  const resetBtn         = document.getElementById('resetBtn');
+  const passagePanel     = document.getElementById('passagePanel');
+
+  const progressText     = document.getElementById('progressText');
+  const answeredText     = document.getElementById('answeredText');
+  const progressBar      = document.getElementById('progressBar');
+  const progressFill     = document.getElementById('progressFill');
+
+  const questionCard     = document.getElementById('questionCard');
+  const qSkill           = document.getElementById('qSkill');
+  const qSource          = document.getElementById('qSource');
+  const qText            = document.getElementById('qText');
+  const optionsEl        = document.getElementById('options');
+
+  const prevBtn          = document.getElementById('prevBtn');
+  const nextBtn          = document.getElementById('nextBtn');
+  const submitBtn        = document.getElementById('submitBtn');
+  const navigatorEl      = document.getElementById('navigator');
+
+  const resultPercent    = document.getElementById('resultPercent');
+  const resultFraction   = document.getElementById('resultFraction');
+  const statCorrect      = document.getElementById('statCorrect');
+  const statIncorrect    = document.getElementById('statIncorrect');
+  const statTime         = document.getElementById('statTime');
+  const resultFeedback   = document.getElementById('resultFeedback');
+  const skillsContainer  = document.getElementById('skillsContainer');
+  const reviewList       = document.getElementById('reviewList');
+
+  const modal            = document.getElementById('modal');
+  const modalTitle       = document.getElementById('modalTitle');
+  const modalText        = document.getElementById('modalText');
+  const modalOk          = document.getElementById('modalOk');
+  const modalCancel      = document.getElementById('modalCancel');
+
+  /* =========================================================
+     UTILITIES
+     ========================================================= */
+  function shuffleArray(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+    }
+    return a;
+  }
+
+  function letterFor(index) {
+    return String.fromCharCode(65 + index);
+  }
+
+  function formatTime(seconds) {
+    const s = Math.max(0, Math.floor(seconds));
+    const m = Math.floor(s / 60);
+    const r = s % 60;
+    return String(m).padStart(2, '0') + ':' + String(r).padStart(2, '0');
+  }
+
+  function showScreen(name) {
+    Object.keys(screens).forEach(function (key) {
+      screens[key].classList.toggle('is-active', key === name);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* =========================================================
+     LOCAL STORAGE
+     ========================================================= */
+  const LS_KEY = 'rct_stats_v1';
+
+  function loadStats() {
+    try {
+      const raw = localStorage.getItem(LS_KEY);
+      if (!raw) return { attempts: {}, best: {}, last: null };
+      const parsed = JSON.parse(raw);
+      return {
+        attempts: parsed.attempts || {},
+        best: parsed.best || {},
+        last: parsed.last || null
+      };
+    } catch (e) {
+      return { attempts: {}, best: {}, last: null };
+    }
+  }
+
+  function saveStats(stats) {
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify(stats));
+    } catch (e) { /* storage unavailable — ignore */ }
+  }
+
+  function refreshHome() {
+    const stats = loadStats();
+    const cards = document.querySelectorAll('.test-card');
+    Array.prototype.forEach.call(cards, function (card) {
+      const m = card.getAttribute('data-mode');
+      const bestEl = card.querySelector('.card-best');
+      const best = stats.best[m];
+      const tries = stats.attempts[m] || 0;
+      if (typeof best === 'number') {
+        bestEl.textContent = 'Best: ' + best + '% · Attempts: ' + tries;
+        bestEl.hidden = false;
+      } else {
+        bestEl.hidden = true;
+      }
+    });
+  }
+
+  /* =========================================================
+     BUILD A RANDOMIZED ATTEMPT
+     ========================================================= */
+  function buildAttempt(selectedMode) {
+    let sources;
+    if (selectedMode === 'both') {
+      sources = READINGS.slice();
+    } else {
+      sources = READINGS.filter(function (r) { return r.id === selectedMode; });
+    }
+
+    const pool = [];
+
+    sources.forEach(function (reading) {
+      reading.questions.forEach(function (q) {
+        // Clone the options, keeping the internal id attached to the text
+        const clonedOptions = q.options.map(function (o) {
+          return { id: o.id, text: o.text };
+        });
+
+        pool.push({
+          uid: reading.id + '-' + q.id,
+          readingId: reading.id,
+          readingTitle: reading.title,
+          skill: q.skill,
+          question: q.question,
+          explanation: q.explanation,
+          correctOptionId: q.correctAnswer,   // internal id — NOT a letter
+          options: shuffleArray(clonedOptions) // independent shuffle per question
+        });
+      });
+    });
+
+    // Shuffle the question order
+    return shuffleArray(pool);
+  }
+
+  function buildPassageHTML(selectedMode) {
+    let sources;
+    if (selectedMode === 'both') {
+      sources = READINGS.slice();
+    } else {
+      sources = READINGS.filter(function (r) { return r.id === selectedMode; });
+    }
+
+    return sources.map(function (r) {
+      return '<article class="card passage-card">' +
+               '<h2 class="passage-title">' + r.title + '</h2>' +
+               '<div class="passage">' + r.passage + '</div>' +
+             '</article>';
+    }).join('');
+  }
+
+  /* =========================================================
+     PASSAGE SCREEN
+     ========================================================= */
+  function openPassageScreen(selectedMode) {
+    mode = selectedMode;
+    passageContainer.innerHTML = buildPassageHTML(mode);
+
+    const count = (mode === 'both') ? 20 : 10;
+    startBarInfo.textContent = count + ' questions · ' +
+      (mode === 'both' ? '25' : '15') + ' minutes. Questions and answer choices are shuffled for every attempt.';
+
+    showScreen('passage');
+  }
+
+  /* =========================================================
+     START / RESET ATTEMPT
+     ========================================================= */
+  function startAttempt(selectedMode) {
+    mode = selectedMode;
+    attempt = buildAttempt(mode);
+    answers = {};
+    current = 0;
+    finished = false;
+
+    const total = attempt.length;
+    totalTime = (total > 10) ? 25 * 60 : 15 * 60;
+    timeLeft = totalTime;
+    startStamp = Date.now();
+
+    // Labels
+    let label;
+    if (mode === 'both') label = 'Both Readings · 20 Questions';
+    else if (mode === 'zendaya') label = 'Reading 1 · The Journey of Zendaya';
+    else label = 'Reading 2 · Animated Films';
+    testModeLabel.textContent = label;
+
+    // Passage panel
+    passagePanel.innerHTML = buildPassageHTML(mode);
+    passagePanel.hidden = true;
+    togglePassageBtn.setAttribute('aria-expanded', 'false');
+    togglePassageBtn.innerHTML = '&#128214; Show Passage';
+
+    renderNavigator();
+    renderQuestion(false);
+    updateProgress();
+    startTimer();
+
+    showScreen('test');
+  }
+
+  /* =========================================================
+     TIMER
+     ========================================================= */
+  function updateTimerDisplay() {
+    timerDisplay.textContent = formatTime(timeLeft);
+    timerDisplay.classList.toggle('is-low', timeLeft <= 60);
+  }
+
+  function startTimer() {
+    if (timerId) clearInterval(timerId);
+    updateTimerDisplay();
+    timerId = setInterval(function () {
+      timeLeft -= 1;
+      if (timeLeft <= 0) {
+        timeLeft = 0;
+        updateTimerDisplay();
+        clearInterval(timerId);
+        timerId = null;
+        doSubmit();
+        return;
+      }
+      updateTimerDisplay();
+    }, 1000);
+  }
+
+  function stopTimer() {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+  }
+
+  /* =========================================================
+     RENDER QUESTION
+     ========================================================= */
+  function renderQuestion(scroll) {
+    const q = attempt[current];
+    if (!q) return;
+
+    qText.textContent = q.question;
+    qSkill.textContent = q.skill;
+
+    if (mode === 'both') {
+      qSource.textContent = q.readingTitle;
+      qSource.hidden = false;
+    } else {
+      qSource.hidden = true;
+    }
+
+    optionsEl.innerHTML = '';
+    q.options.forEach(function (opt, index) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option';
+      const isSelected = answers[q.uid] === opt.id;
+      if (isSelected) btn.classList.add('selected');
+      btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+
+      const letterSpan = document.createElement('span');
+      letterSpan.className = 'letter';
+      letterSpan.textContent = letterFor(index);
+
+      const textSpan = document.createElement('span');
+      textSpan.className = 'opt-text';
+      textSpan.textContent = opt.text;
+
+      btn.appendChild(letterSpan);
+      btn.appendChild(textSpan);
+      btn.addEventListener('click', function () {
+        selectOption(q.uid, opt.id);
+      });
+
+      optionsEl.appendChild(btn);
+    });
+
+    prevBtn.disabled = (current === 0);
+    nextBtn.disabled = (current === attempt.length - 1);
+
+    updateProgress();
+
+    if (scroll) {
+      questionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function selectOption(uid, optionId) {
+    answers[uid] = optionId;
+    const q = attempt[current];
+
+    Array.prototype.forEach.call(optionsEl.children, function (btn, index) {
+      const isSel = q.options[index].id === optionId;
+      btn.classList.toggle('selected', isSel);
+      btn.setAttribute('aria-pressed', isSel ? 'true' : 'false');
+    });
+
+    updateProgress();
+  }
+
+  /* =========================================================
+     PROGRESS + NAVIGATOR
+     ========================================================= */
+  function updateProgress() {
+    const total = attempt.length;
+    const answeredCount = Object.keys(answers).length;
+
+    progressText.textContent = 'Question ' + (current + 1) + ' of ' + total;
+    answeredText.textContent = answeredCount + ' of ' + total + ' answered';
+
+    const pct = total ? Math.round((answeredCount / total) * 100) : 0;
+    progressFill.style.width = pct + '%';
+    progressBar.setAttribute('aria-valuenow', String(pct));
+
+    updateNavigator();
+  }
+
+  function renderNavigator() {
+    navigatorEl.innerHTML = '';
+    attempt.forEach(function (q, index) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'nav-btn';
+      btn.textContent = String(index + 1);
+      btn.addEventListener('click', function () {
+        current = index;
+        renderQuestion(true);
+      });
+      navigatorEl.appendChild(btn);
+    });
+    updateNavigator();
+  }
+
+  function updateNavigator() {
+    const buttons = navigatorEl.children;
+    for (let i = 0; i < buttons.length; i++) {
+      const q = attempt[i];
+      const btn = buttons[i];
+      const isAnswered = !!answers[q.uid];
+      const isCurrent = (i === current);
+
+      btn.className = 'nav-btn' +
+        (isAnswered ? ' is-answered' : '') +
+        (isCurrent ? ' is-current' : '');
+
+      if (isCurrent) btn.setAttribute('aria-current', 'true');
+      else btn.removeAttribute('aria-current');
+
+      btn.setAttribute('aria-label',
+        'Question ' + (i + 1) + (isAnswered ? ' (answered)' : ' (unanswered)'));
+    }
+  }
+
+  /* =========================================================
+     NAVIGATION BUTTONS
+     ========================================================= */
+  prevBtn.addEventListener('click', function () {
+    if (current > 0) {
+      current -= 1;
+      renderQuestion(true);
+    }
+  });
+
+  nextBtn.addEventListener('click', function () {
+    if (current < attempt.length - 1) {
+      current += 1;
+      renderQuestion(true);
+    }
+  });
+
+  submitBtn.addEventListener('click', requestSubmit);
+
+  togglePassageBtn.addEventListener('click', function () {
+    const isHidden = passagePanel.hidden;
+    passagePanel.hidden = !isHidden;
+    togglePassageBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    togglePassageBtn.innerHTML = isHidden ? '&#128214; Hide Passage' : '&#128214; Show Passage';
+  });
+
+  resetBtn.addEventListener('click', function () {
+    showModal(
+      'Reset this test?',
+      'Your current answers, score and timer will be cleared and a brand-new randomized attempt will begin.',
+      function () { startAttempt(mode); }
+    );
+  });
+
+  /* =========================================================
+     MODAL
+     ========================================================= */
+  let modalCallback = null;
+
+  function showModal(title, text, onConfirm) {
+    modalTitle.textContent = title;
+    modalText.textContent = text;
+    modalCallback = onConfirm;
+    modal.hidden = false;
+    modalOk.focus();
+  }
+
+  function hideModal() {
+    modal.hidden = true;
+    modalCallback = null;
+  }
+
+  modalOk.addEventListener('click', function () {
+    const cb = modalCallback;
+    hideModal();
+    if (cb) cb();
+  });
+
+  modalCancel.addEventListener('click', hideModal);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modal.hidden) hideModal();
+  });
+
+  /* =========================================================
+     SUBMIT
+     ========================================================= */
+  function requestSubmit() {
+    if (finished) return;
+    const total = attempt.length;
+    const answered = Object.keys(answers).length;
+    const missing = total - answered;
+
+    if (missing > 0) {
+      showModal(
+        'Submit test?',
+        'You have ' + missing + ' unanswered question' + (missing > 1 ? 's' : '') +
+        '. Are you sure you want to submit?',
+        doSubmit
+      );
+    } else {
+      showModal(
+        'Submit test?',
+        'You have answered all ' + total + ' questions. Submit your test now?',
+        doSubmit
+      );
+    }
+  }
+
+  function doSubmit() {
+    if (finished) return;
+    finished = true;
+    stopTimer();
+    hideModal();
+
+    let correctCount = 0;
+    attempt.forEach(function (q) {
+      if (answers[q.uid] === q.correctOptionId) correctCount += 1;
+    });
+
+    const total = attempt.length;
+    const incorrectCount = total - correctCount;
+    const percentage = Math.round((correctCount / total) * 100);
+    const timeUsed = totalTime - timeLeft;
+
+    /* ---- Stats persistence ---- */
+    const stats = loadStats();
+    stats.attempts[mode] = (stats.attempts[mode] || 0) + 1;
+    if (typeof stats.best[mode] !== 'number' || percentage > stats.best[mode]) {
+      stats.best[mode] = percentage;
+    }
+    stats.last = mode;
+    saveStats(stats);
+
+    /* ---- Result screen ---- */
+    resultPercent.textContent = percentage + '%';
+    resultFraction.textContent = correctCount + ' / ' + total;
+    statCorrect.textContent = String(correctCount);
+    statIncorrect.textContent = String(incorrectCount);
+    statTime.textContent = formatTime(timeUsed);
+
+    let feedback;
+    if (percentage >= 90) {
+      feedback = 'Excellent reading comprehension. You handled main ideas, details, vocabulary and inference questions with confidence.';
+    } else if (percentage >= 80) {
+      feedback = 'Very good performance. Your reading comprehension is strong, with only minor gaps.';
+    } else if (percentage >= 70) {
+      feedback = 'Good, but there are some areas to improve. Look carefully at the questions you missed.';
+    } else if (percentage >= 60) {
+      feedback = 'Fair. Review the passage and question types carefully before your next attempt.';
+    } else {
+      feedback = 'More reading practice is recommended. Read each passage slowly and check the evidence for every answer.';
+    }
+    resultFeedback.textContent = feedback;
+
+    renderSkills();
+    renderReview();
+    refreshHome();
+
+    showScreen('result');
+  }
+
+  /* =========================================================
+     SKILLS ANALYSIS
+     ========================================================= */
+  function renderSkills() {
+    const stats = {};
+    attempt.forEach(function (q) {
+      if (!stats[q.skill]) stats[q.skill] = { correct: 0, total: 0 };
+      stats[q.skill].total += 1;
+      if (answers[q.uid] === q.correctOptionId) stats[q.skill].correct += 1;
+    });
+
+    const keys = Object.keys(stats).sort(function (a, b) {
+      const ia = SKILL_ORDER.indexOf(a);
+      const ib = SKILL_ORDER.indexOf(b);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
+
+    skillsContainer.innerHTML = '';
+
+    keys.forEach(function (skill) {
+      const s = stats[skill];
+      const pct = Math.round((s.correct / s.total) * 100);
+
+      const row = document.createElement('div');
+      row.className = 'skill-row';
+
+      const name = document.createElement('span');
+      name.className = 'skill-name';
+      name.textContent = skill;
+
+      const track = document.createElement('div');
+      track.className = 'skill-track';
+      const fill = document.createElement('div');
+      fill.className = 'skill-fill';
+      fill.style.width = pct + '%';
+      track.appendChild(fill);
+
+      const pctEl = document.createElement('span');
+      pctEl.className = 'skill-pct';
+      pctEl.textContent = pct + '%';
+
+      row.appendChild(name);
+      row.appendChild(track);
+      row.appendChild(pctEl);
+
+      track.setAttribute('role', 'progressbar');
+      track.setAttribute('aria-valuemin', '0');
+      track.setAttribute('aria-valuemax', '100');
+      track.setAttribute('aria-valuenow', String(pct));
+      track.setAttribute('aria-label', skill + ': ' + pct + '%');
+
+      skillsContainer.appendChild(row);
+    });
+  }
+
+  /* =========================================================
+     DETAILED REVIEW
+     ========================================================= */
+  function renderReview() {
+    reviewList.innerHTML = '';
+
+    attempt.forEach(function (q, index) {
+      const selectedId = answers[q.uid];
+      const correctIndex = q.options.findIndex(function (o) { return o.id === q.correctOptionId; });
+      const userIndex = q.options.findIndex(function (o) { return o.id === selectedId; });
+      const isCorrect = (selectedId === q.correctOptionId);
+
+      const item = document.createElement('div');
+      item.className = 'review-item ' + (isCorrect ? 'correct' : 'incorrect');
+
+      /* Head */
+      const head = document.createElement('div');
+      head.className = 'review-head';
+
+      const num = document.createElement('span');
+      num.className = 'review-num';
+      num.textContent = 'Question ' + (index + 1) +
+        (mode === 'both' ? ' · ' + q.readingTitle : '');
+
+      const pill = document.createElement('span');
+      pill.className = 'pill ' + (isCorrect ? 'pill-correct' : 'pill-incorrect');
+      pill.textContent = isCorrect ? '✓ Correct' : '✗ Incorrect';
+
+      head.appendChild(num);
+      head.appendChild(pill);
+      item.appendChild(head);
+
+      /* Skill badge */
+      const skillBadge = document.createElement('span');
+      skillBadge.className = 'q-skill';
+      skillBadge.textContent = q.skill;
+      skillBadge.style.display = 'inline-block';
+      skillBadge.style.marginBottom = '12px';
+      item.appendChild(skillBadge);
+
+      /* Question text */
+      const qEl = document.createElement('p');
+      qEl.className = 'review-q';
+      qEl.textContent = q.question;
+      item.appendChild(qEl);
+
+      /* User answer */
+      const userEl = document.createElement('p');
+      userEl.className = 'ans ans-user ' + (isCorrect ? 'is-right' : 'is-wrong');
+      if (selectedId) {
+        userEl.innerHTML = '<strong>Your answer:</strong> ' +
+          letterFor(userIndex) + '. ' + escapeHtml(q.options[userIndex].text);
+      } else {
+        userEl.innerHTML = '<strong>Your answer:</strong> — Not answered';
+      }
+      item.appendChild(userEl);
+
+      /* Correct answer */
+      const correctEl = document.createElement('p');
+      correctEl.className = 'ans ans-correct';
+      correctEl.innerHTML = '<strong>Correct answer:</strong> ' +
+        letterFor(correctIndex) + '. ' + escapeHtml(q.options[correctIndex].text);
+      item.appendChild(correctEl);
+
+      /* Explanation */
+      const why = document.createElement('div');
+      why.className = 'review-why';
+      why.innerHTML = '<strong>Why?</strong> ' + escapeHtml(q.explanation);
+      item.appendChild(why);
+
+      reviewList.appendChild(item);
+    });
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* =========================================================
+     EVENT WIRING
+     ========================================================= */
+  document.querySelectorAll('.test-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      openPassageScreen(card.getAttribute('data-mode'));
+    });
+  });
+
+  startTestBtn.addEventListener('click', function () {
+    startAttempt(mode);
+  });
+
+  backHomeBtn.addEventListener('click', function () {
+    showScreen('home');
+    refreshHome();
+  });
+
+  document.getElementById('reviewBtn').addEventListener('click', function () {
+    showScreen('review');
+  });
+
+  document.getElementById('backToResultBtn').addEventListener('click', function () {
+    showScreen('result');
+  });
+
+  document.getElementById('retakeBtn').addEventListener('click', function () {
+    startAttempt(mode);
+  });
+
+  document.getElementById('retakeFromReviewBtn').addEventListener('click', function () {
+    startAttempt(mode);
+  });
+
+  document.getElementById('homeFromResultBtn').addEventListener('click', function () {
+    showScreen('home');
+    refreshHome();
+  });
+
+  document.getElementById('homeFromReviewBtn').addEventListener('click', function () {
+    showScreen('home');
+    refreshHome();
+  });
+
+  /* Keyboard shortcuts: 1-4 select an answer during the test */
+  document.addEventListener('keydown', function (e) {
+    if (!screens.test.classList.contains('is-active') || finished) return;
+    if (!modal.hidden) return;
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+
+    const num = parseInt(e.key, 10);
+    if (num >= 1 && num <= 4) {
+      const q = attempt[current];
+      if (q && q.options[num - 1]) {
+        selectOption(q.uid, q.options[num - 1].id);
+      }
+    }
+  });
+
+  /* =========================================================
+     INIT
+     ========================================================= */
+  refreshHome();
+
+})();
+</script>
+</body>
+</html>
